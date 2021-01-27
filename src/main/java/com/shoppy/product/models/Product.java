@@ -3,22 +3,33 @@ package com.shoppy.product.models;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
-	private String productId;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long productId;
+	
 	private String productName;
 	private String productCode;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yy")
 	private Date releaseDate; //Date time---needs
 	private String description;
 	private BigDecimal price; //decimal example 28.99
 	private BigDecimal starRating; //decimal example 4.5
 	private String imageUrl;
 	
-	public String getProductId() {
-		return productId;
-	}
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
+	
 	public String getProductName() {
 		return productName;
 	}
@@ -60,6 +71,12 @@ public class Product {
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public Long getProductId() {
+		return productId;
+	}
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 	
 }
